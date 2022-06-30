@@ -1,7 +1,3 @@
-// const rock = 'rock';
-// const paper = 'paper';
-// const scissors = 'scissors';
-
 let gameMoves = ['rock', 'paper', 'scissors'];
 
 function computerPlay() {
@@ -12,43 +8,44 @@ function computerPlay() {
 function playRound(playerSelection) {
     let computerSelection = computerPlay();
     if (playerSelection === computerSelection) {
-        console.log("You tie!");
         return null;
     }
 
     switch (playerSelection) {
         case "rock":
             if (computerSelection === "scissors") {
-                console.log("You win!");
                 return true;
             }
             if (computerSelection === "paper") {
-                console.log("You lose!");
                 return false;
             }
             break;
         case "paper":
             if (computerSelection === "rock") {
-                console.log("You win!");
                 return true;
             }
             if (computerSelection === "scissors") {
-                console.log("You lose!");
                 return false;
             }
             break;
         case "scissors":
             if (computerSelection === "paper") {
-                console.log("You win!");
                 return true;
             }
             if (computerSelection === "rock") {
-                console.log("You lose!");
                 return false;
             }
     }
-
 }
+
+function updateResult() {
+    const result = document.getElementById("result");
+    if (result.innerHTML === "Ready?") {
+      result.innerHTML = "Swapped text!";
+    } else {
+      x.innerHTML = "Hello";
+    }
+  }
 
 // function game() {
 //     let playerWins = 0;
@@ -107,14 +104,6 @@ function determineWinner(playerWins, computerWins) {
 const buttons = document.querySelectorAll('.button')
 const button = buttons[0];
 console.log(button.getAttribute("id"));
-
-// onclick="alert(this.id)"
-
-
-// buttons.forEach(button => button.addEventListener("click", playRound()));
-
-// const computerInput = computerPlay();
-// const playerInput = document.querySelector();
 
 
 

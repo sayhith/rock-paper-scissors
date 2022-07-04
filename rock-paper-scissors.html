@@ -7,11 +7,23 @@
 </head>
 
 <body> 
-  <h1>Rock Paper Scissors</h1>
-  <div id="result">Ready?</div>
-  <button id="rock" class="button" onClick="playRound(this.id)">Rock</button>
-  <button id="paper" class="button" onClick="playRound(this.id)">Paper</button>
-  <button id="scissors" class="button" onClick="playRound(this.id)">Scissors</button>
+  <header>
+    <h1>stone woodpulp shears</h1>
+  </header>
+
+  <main> 
+    <h2>Ready?</h2>
+    <h3>First to 5 points wins! Good luck...</h3>
+    <div>
+      <button id="rock" class="button" onClick="playRound(this.id)">Rock</button>
+      <button id="paper" class="button" onClick="playRound(this.id)">Paper</button>
+      <button id="scissors" class="button" onClick="playRound(this.id)">Scissors</button>
+    </div>
+    <div>
+      <p id="playerScore">You: 0</p>
+      <p id="computerScore">The Machine: 0</p>
+    </div> 
+  </main>
 
 <script src="scripts.js">
 </script>

@@ -1,51 +1,78 @@
 let gameMoves = ['rock', 'paper', 'scissors'];
+let playerScore = 0;
+let computerScore = 0;
+
+const playerScoreDisplay = document.getElementById("playerScore");
+const computerScoreDisplay = document.getElementById("computerScore");
 
 function computerPlay() {
     return gameMoves[Math.floor(Math.random() * gameMoves.length)];
 }
 
-
 function playRound(playerSelection) {
     let computerSelection = computerPlay();
-    if (playerSelection === computerSelection) {
-        return null;
-    }
-
-    switch (playerSelection) {
-        case "rock":
-            if (computerSelection === "scissors") {
-                return true;
-            }
-            if (computerSelection === "paper") {
-                return false;
-            }
+    switch(determineResult(playerSelection, computerSelection)) {
+        case true:
+            playerScore++
+            playerScoreDisplay.textContent = `You: ${playerScore}`;
             break;
-        case "paper":
-            if (computerSelection === "rock") {
-                return true;
-            }
-            if (computerSelection === "scissors") {
-                return false;
-            }
+        case false:
+            computerScore++
+            computerScoreDisplay.innerHTML = `The Machine: ${computerScore}`;
             break;
-        case "scissors":
-            if (computerSelection === "paper") {
-                return true;
-            }
-            if (computerSelection === "rock") {
-                return false;
-            }
     }
 }
 
-function updateResult() {
-    const result = document.getElementById("result");
-    if (result.innerHTML === "Ready?") {
-      result.innerHTML = "Swapped text!";
-    } else {
-      x.innerHTML = "Hello";
+function determineResult(playerSelection, computerSelection) {
+    switch (playerSelection + computerSelection) {
+        case "rockscissors":
+        case "scissorspaper":
+        case "paperrock":
+            return true;
+
+        case "rockpaper":
+        case "scissorsrock":
+        case "paperscissors":
+            return false;
+
+        case "rockrock":
+        case "paperpaper":
+        case "scissorsscissors":
+            return null;
     }
-  }
+}
+
+// function game() {
+//     const playerScore = document.getElementById("playerScore");
+//     const computerScore = document.getElementById("computerScore");
+
+//     while (playerWins < 5 && computerWins < 5) {
+//         switch (playRound()) {
+//             case true:
+//                 playerWins++;
+//                 playerScore.textContent = `Player: ${playerWins}`;
+//                 break;
+//             case false:
+//                 computerWins++;
+//                 computerScore.textContent = `The Machine: ${computerWins}`;
+//                 break;
+//         }
+//     }
+// }
+
+// function updateResult(winLoseTie) {
+//     const result = document.getElementById("result");
+//     switch (winLoseTie) {
+//         case null:
+//             result.innerHTML = "You tie!";
+//             break;
+//         case true:
+//             result.innerHTML = "You win!";
+//             break;
+//         case false:
+//             result.innerHTML = "You lose!"
+//     }
+// }
 
 // function game() {
 //     let playerWins = 0;
@@ -87,24 +114,10 @@ function updateResult() {
 //     }
 // }
 
-function determineWinner(playerWins, computerWins) {
-    switch (playerWins > computerWins) {
-        case true:
-            console.log("Congratulations! You win the game!");
-            break;
-        case false:
-            console.log("You lost the game. Try again!");
-            break;
-        default:
-            console.log("You tied the game!");
-    }
-}
-
 
 const buttons = document.querySelectorAll('.button')
 const button = buttons[0];
 console.log(button.getAttribute("id"));
-
 
 
 

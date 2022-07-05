@@ -12,17 +12,20 @@
   </header>
 
   <main> 
-    <h2>Ready?</h2>
-    <h3>First to 5 points wins! Good luck...</h3>
-    <div>
-      <button id="rock" class="button" onClick="playRound(this.id)">Rock</button>
-      <button id="paper" class="button" onClick="playRound(this.id)">Paper</button>
-      <button id="scissors" class="button" onClick="playRound(this.id)">Scissors</button>
+    <h2 id="resultMessage">Ready?</h2>
+    <h3 id="movesMessage">First to 5 points wins! Good luck...</h3>
+    <div class="movesButtonDiv">
+      <button id="rock" class="movesButton">Rock</button>
+      <button id="paper" class="movesButton">Paper</button>
+      <button id="scissors" class="movesButton">Scissors</button>
     </div>
     <div>
       <p id="playerScore">You: 0</p>
       <p id="computerScore">The Machine: 0</p>
     </div> 
+    <div> 
+      <button id="restartButton" style="display:none">Try again</button>
+    </div>
   </main>
 
 <script src="scripts.js">

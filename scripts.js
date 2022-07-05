@@ -1,29 +1,28 @@
 let gameMoves = ['rock', 'paper', 'scissors'];
 let playerScore = 0;
 let computerScore = 0;
+let playerSelection = null;
+let computerSelection = null;
 
 const playerScoreDisplay = document.getElementById("playerScore");
 const computerScoreDisplay = document.getElementById("computerScore");
+const resultMessage = document.getElementById("resultMessage");
+const movesMessage = document.getElementById("movesMessage");
+const buttons = Array.from(document.querySelectorAll(".movesButton"));
+const buttonsDiv = document.querySelectorAll(".movesButtonDiv");
+const restartButton = document.getElementById("restartButton");
 
 function computerPlay() {
     return gameMoves[Math.floor(Math.random() * gameMoves.length)];
 }
 
-function playRound(playerSelection) {
-    let computerSelection = computerPlay();
-    switch(determineResult(playerSelection, computerSelection)) {
-        case true:
-            playerScore++
-            playerScoreDisplay.textContent = `You: ${playerScore}`;
-            break;
-        case false:
-            computerScore++
-            computerScoreDisplay.innerHTML = `The Machine: ${computerScore}`;
-            break;
-    }
+function playRound(e) {
+    computerSelection = computerPlay();
+    playerSelection = e.target.id;
+    updateScore(determineResult());
 }
 
-function determineResult(playerSelection, computerSelection) {
+function determineResult() {
     switch (playerSelection + computerSelection) {
         case "rockscissors":
         case "scissorspaper":
@@ -41,6 +40,72 @@ function determineResult(playerSelection, computerSelection) {
             return null;
     }
 }
+
+function updateScore(result) {
+    switch(result) {
+        case true:
+            playerScore++
+            playerScoreDisplay.textContent = `You: ${playerScore}`;
+            resultMessage.textContent = "You win!";
+            break;
+        case false:
+            computerScore++
+            computerScoreDisplay.textContent = `The Machine: ${computerScore}`;
+            resultMessage.textContent = "You lose :(";
+            break;
+        case null:
+            resultMessage.textContent = "It's a tie";
+            break;
+    }
+    movesMessage.textContent = `You chose ${playerSelection.toUpperCase()}, 
+        the computer chose ${computerSelection.toUpperCase()}`;
+}
+
+let isGameOver = () => (playerScore === 5 || computerScore === 5);
+
+function endGame() {
+    switch(5) {
+        case playerScore: 
+            resultMessage.textContent = "You won the game! Congratulations, you beat the machine.";
+            break;
+        case computerScore: 
+            resultMessage.textContent = "You lost the game... to a computer.";
+            break;
+    }
+    if (isGameOver) {
+        // if (restartButton.style.display === 'none') {
+        //     restartButton.style.display = 'block';
+        // } else {
+        //     restartButton.style.display = 'none';
+        // }
+        restartButton.style.display = 'block';
+        restartButton.addEventListener("click", restartGame);
+        buttonsDiv.style.display = 'none';
+    }
+}
+
+function restartGame() {
+    playerScore = 0;
+    computerScore = 0;
+    playerSelection = null;
+    computerSelection = null;
+    resultMessage.textContent = "Ready?";
+    movesMessage.textContent = "First to 5 points wins! Good luck...";
+    playerScoreDisplay.textContent = "You: 0";
+    computerScoreDisplay.textContent = "The Machine: 0";
+}
+
+buttons.forEach(button => button.addEventListener('click', playRound));
+buttons.forEach(button => button.addEventListener('click', endGame));
+
+
+
+
+// restartButton.addEventListener("click", restartGame);
+
+
+
+
 
 // function game() {
 //     const playerScore = document.getElementById("playerScore");
@@ -115,9 +180,8 @@ function determineResult(playerSelection, computerSelection) {
 // }
 
 
-const buttons = document.querySelectorAll('.button')
-const button = buttons[0];
-console.log(button.getAttribute("id"));
+
+
 
 
 
